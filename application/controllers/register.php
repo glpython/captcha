@@ -41,6 +41,8 @@ class register extends CI_Controller{
                 $this->session->set_userdata($sessionArr);
 
                 $this->results->setDatas($data);
+            }else{
+                $status = status::failed;
             }
 
         }
