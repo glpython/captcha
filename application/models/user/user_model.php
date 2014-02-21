@@ -75,6 +75,25 @@ class user_model extends CI_Model{
         return $this->regDate;
     }
 
+    //用户登录
+    function loginUser(){
 
+        $query = $this->db->query("select mail,password from user_info where mail='" . $this->getMail() . "' and password = '" . $this->getPassword() . "'");
+
+        return $query->result_object();
+    }
+
+    //用户注册
+    function registerUser(){
+
+        $data = array(
+            "mail" => $this->getMail(),
+            "password" => $this->getPassword()
+        );
+
+        $this->db->insert('user_info',$data);
+
+        return $this->db->insert_id();
+    }
 
 }

@@ -3,19 +3,19 @@
  * Created by JetBrains PhpStorm.
  * User: yu
  * Date: 2/21/14
- * Time: 9:50 AM
+ * Time: 1:52 PM
  * To change this template use File | Settings | File Templates.
  */
 
-class login extends CI_Controller{
+class register extends CI_Controller{
 
     public function index(){
 
-        $this->load->view("login_view");
+        $this->load->view("register_view");
 
     }
 
-    public function loginUser(){
+    public function registerUser(){
 
         $mail = $this->input->get("mail");
         $password = $this->input->get("password");
@@ -28,27 +28,25 @@ class login extends CI_Controller{
             $this->user->setMail($mail);
             $this->user->setPassword(md5($password));
 
-            $data = $this->user->loginUser();
+            $data = $this->user->registerUser();
 
             if($data){
                 $status = status::success;
 
                 $sessionArr = array(
-                    'id' => $data[0]->id,
-                    'mail' => $data[0]->mail
+                    'id' => $data,
+                    'mail' => $mail
                 );
 
                 $this->session->set_userdata($sessionArr);
 
                 $this->results->setDatas($data);
-            }else{
-                $status = status::failed;
             }
+
         }
 
         $this->results->setStatus($status);
 
         $this->output->set_output(json_encode($this->results));
     }
-
 }
