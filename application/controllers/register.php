@@ -17,13 +17,16 @@ class register extends CI_Controller{
 
     public function registerUser(){
 
+        $this->load->model("user/user_model","user");
+
         $mail = $this->input->get("mail");
         $password = $this->input->get("password");
 
         if($mail == "" || $password == ""){
             $status = status::error;
+        }else if($this->user->checkUser()){
+            $status = status::AlreadyExists;
         }else{
-            $this->load->model("user/user_model","user");
 
             $this->user->setMail($mail);
             $this->user->setPassword(md5($password));

@@ -96,4 +96,16 @@ class user_model extends CI_Model{
         return $this->db->insert_id();
     }
 
+    //验证用户名是否存在
+    function checkUser(){
+
+        $this->db->query("select * from user_info where mail='" . $this->getMail() . "'");
+
+        if($this->db->affected_rows()>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }

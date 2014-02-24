@@ -11,4 +11,5 @@ class status extends CI_Model{
     const success = "success";
     const failed = "failed";
     const error = "error";
+    const AlreadyExists = "AlreadyExists";
 }
